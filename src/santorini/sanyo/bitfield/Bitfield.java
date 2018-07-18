@@ -1,6 +1,8 @@
 package santorini.sanyo.bitfield;
 
 
+import java.util.Objects;
+
 public final class Bitfield {
     public static int SIZE = Long.SIZE;
 
@@ -90,11 +92,19 @@ public final class Bitfield {
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bitfield bitfield = (Bitfield) o;
+        return bits == bitfield.bits;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return Objects.hash(bits);
+    }
+
+    @Override
+    public String toString() {
+        return Long.toBinaryString(bits);
     }
 }
