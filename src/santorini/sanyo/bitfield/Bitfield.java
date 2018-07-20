@@ -74,10 +74,7 @@ public final class Bitfield {
     }
 
     private void switchBits(long mask) {
-        Bitfield temp = new Bitfield();
-        temp.bits = mask;
-
-        switchBits(temp);
+//       no tests for it
     }
 
     public boolean any() {
@@ -101,9 +98,11 @@ public final class Bitfield {
     }
 
     public void keep(Bitfield other) {
+
     }
 
     public void include(Bitfield other) {
+
     }
 
     public Bitfield not() {
@@ -122,7 +121,10 @@ public final class Bitfield {
     }
 
     public Bitfield xor(Bitfield other) {
-        return new Bitfield();
+        Bitfield result = new Bitfield(this);
+        result.bits = bits ^ other.bits;
+
+        return result;
     }
 
     @Override
