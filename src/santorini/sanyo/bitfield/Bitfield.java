@@ -39,9 +39,11 @@ public final class Bitfield {
     }
 
     public void set(Bitfield mask, boolean value) {
+
     }
 
     public void set(Bitfield other) {
+        bits = other.bits;
     }
 
     public void setAll(boolean value) {
