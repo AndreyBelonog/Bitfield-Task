@@ -93,7 +93,7 @@ public final class Bitfield {
     }
 
     public boolean allOf(Bitfield other) {
-        return false;
+        return false; //unimplemented
     }
 
     public void invert() {
@@ -106,7 +106,10 @@ public final class Bitfield {
     }
 
     public Bitfield not() {
-        return new Bitfield();
+        Bitfield result = new Bitfield();
+        result.bits = ~ bits;
+
+        return result;
     }
 
     public Bitfield and(Bitfield other) {
