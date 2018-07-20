@@ -90,7 +90,7 @@ public final class Bitfield {
     }
 
     public boolean allOf(Bitfield other) {
-        return (bits == other.bits || other.bits == 0L);
+        return (bits & other.bits) == other.bits;
     }
 
     public void invert() {
@@ -102,7 +102,7 @@ public final class Bitfield {
     }
 
     public void include(Bitfield other) {
-
+        bits |= other.bits;
     }
 
     public Bitfield not() {
@@ -113,11 +113,17 @@ public final class Bitfield {
     }
 
     public Bitfield and(Bitfield other) {
-        return new Bitfield();
+        Bitfield result = new Bitfield(this);
+        result.bits = bits & other.bits;
+
+        return result;
     }
 
     public Bitfield or(Bitfield other) {
-        return new Bitfield();
+        Bitfield result = new Bitfield(this);
+        result.bits = bits | other.bits;
+
+        return result;
     }
 
     public Bitfield xor(Bitfield other) {
