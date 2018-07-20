@@ -32,9 +32,9 @@ public final class Bitfield {
         checkIndex(index);
 
         if(value){
-            bits = bits | (1L << index);
+            bits |= (1L << index);
         }else{
-            bits = bits & ~(1L << index);
+            bits &= ~(1L << index);
         }
     }
 
