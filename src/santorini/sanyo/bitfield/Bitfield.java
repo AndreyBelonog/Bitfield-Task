@@ -98,7 +98,7 @@ public final class Bitfield {
     }
 
     public void keep(Bitfield other) {
-
+        bits &= other.bits;
     }
 
     public void include(Bitfield other) {
