@@ -70,6 +70,7 @@ public final class Bitfield {
     }
 
     public void switchBits(Bitfield mask) {
+        bits ^= mask.bits;
     }
 
     private void switchBits(long mask) {
