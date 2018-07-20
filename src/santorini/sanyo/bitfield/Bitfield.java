@@ -52,6 +52,11 @@ public final class Bitfield {
     }
 
     public void setAll(boolean value) {
+        if(value){
+            bits = ~0L;
+        }else{
+            bits = 0L;
+        }
     }
 
     public void switchBit(int index) {
