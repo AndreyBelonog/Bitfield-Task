@@ -93,7 +93,7 @@ public final class Bitfield {
     }
 
     public boolean allOf(Bitfield other) {
-        return false;
+        return (bits == other.bits || other.bits == 0L);
     }
 
     public void invert() {
