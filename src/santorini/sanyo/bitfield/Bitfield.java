@@ -8,12 +8,14 @@ public final class Bitfield {
 
     private long bits = 0;
 
+
     public Bitfield() {
     }
 
     public Bitfield(Bitfield bf) {
         bits = bf.bits;
     }
+
 
     private void checkIndex(int index) {
         if(index < 0 || index >= SIZE) {
@@ -23,11 +25,17 @@ public final class Bitfield {
 
     public boolean get(int index) {
         checkIndex(index);
-        return false;
+        return ((bits  >> index) & 1) == 1;
     }
 
     public void set(int index, boolean value) {
         checkIndex(index);
+
+        if(value){
+            bits = bits | (1L << index);
+        }else{
+            bits = bits & ~(1L << index);
+        }
     }
 
     public void set(Bitfield mask, boolean value) {
