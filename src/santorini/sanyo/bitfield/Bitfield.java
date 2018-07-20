@@ -89,7 +89,7 @@ public final class Bitfield {
     }
 
     public boolean all() {
-        return false;
+        return bits == ~0L;
     }
 
     public boolean allOf(Bitfield other) {
