@@ -74,6 +74,10 @@ public final class Bitfield {
     }
 
     private void switchBits(long mask) {
+        Bitfield temp = new Bitfield();
+        temp.bits = mask;
+
+        switchBits(temp);
     }
 
     public boolean any() {
