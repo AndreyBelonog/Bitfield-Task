@@ -93,10 +93,11 @@ public final class Bitfield {
     }
 
     public boolean allOf(Bitfield other) {
-        return false; //unimplemented
+        return false;
     }
 
     public void invert() {
+        bits = ~bits;
     }
 
     public void keep(Bitfield other) {
