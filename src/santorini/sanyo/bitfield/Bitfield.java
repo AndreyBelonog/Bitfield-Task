@@ -39,7 +39,12 @@ public final class Bitfield {
     }
 
     public void set(Bitfield mask, boolean value) {
-
+        if (value){
+            bits = mask.bits;
+        }else{
+            bits = 0;
+        }
+//        have to finalize it
     }
 
     public void set(Bitfield other) {
