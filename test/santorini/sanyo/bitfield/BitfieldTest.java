@@ -68,6 +68,9 @@ class BitfieldTest {
         temp.set(a, true);
         temp.set(b, true);
         assertEquals(temp, a.or(b));
+        temp.set(b, false);
+        temp.set(b, true);
+        assertEquals(temp, a.or(b));
     }
 
     @Test
