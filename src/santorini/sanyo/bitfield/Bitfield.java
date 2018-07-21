@@ -42,11 +42,9 @@ public final class Bitfield {
         if(value){
             bits |= mask.bits;
         }else{
-            if(bits == mask.bits){
-                bits = 0;
-            }
-            bits &= mask.bits;
+            bits &= ~mask.bits;
         }
+
     }
 
     public void set(Bitfield other) {
