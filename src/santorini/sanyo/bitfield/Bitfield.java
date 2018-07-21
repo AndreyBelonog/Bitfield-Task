@@ -42,6 +42,9 @@ public final class Bitfield {
         if(value){
             bits |= mask.bits;
         }else {
+            if(bits == 0){
+                return;
+            }
             bits ^= mask.bits;
         }
     }
