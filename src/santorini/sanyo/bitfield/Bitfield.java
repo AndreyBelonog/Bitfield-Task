@@ -41,11 +41,11 @@ public final class Bitfield {
     public void set(Bitfield mask, boolean value) {
         if(value){
             bits |= mask.bits;
-        }else {
-            if(bits == 0){
-                return;
+        }else{
+            if(bits == mask.bits){
+                bits = 0;
             }
-            bits ^= mask.bits;
+            bits &= mask.bits;
         }
     }
 
