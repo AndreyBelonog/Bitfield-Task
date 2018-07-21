@@ -56,6 +56,10 @@ class BitfieldTest {
         Bitfield temp = new Bitfield();
         temp.set(a, true);
         assertEquals(temp, a);
+        temp.set(a, true);
+        assertEquals(temp, a);
+        temp.set(a, false);
+        assertEquals(temp, none);
         temp.set(a, false);
         assertEquals(temp, none);
         temp.set(a, true);
