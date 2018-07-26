@@ -18,30 +18,30 @@ public final class Bitfield {
 
 
     private void checkIndex(int index) {
-        if(index < 0 || index >= SIZE) {
+        if (index < 0 || index >= SIZE) {
             throw new IndexOutOfBoundsException("Index: " + index + ", size: " + SIZE);
         }
     }
 
     public boolean get(int index) {
         checkIndex(index);
-        return ((bits  >> index) & 1) == 1;
+        return ((bits >> index) & 1) == 1;
     }
 
     public void set(int index, boolean value) {
         checkIndex(index);
 
-        if(value){
+        if (value) {
             bits |= (1L << index);
-        }else{
+        } else {
             bits &= ~(1L << index);
         }
     }
 
     public void set(Bitfield mask, boolean value) {
-        if(value){
+        if (value) {
             bits |= mask.bits;
-        }else{
+        } else {
             bits &= ~mask.bits;
         }
 
@@ -52,9 +52,9 @@ public final class Bitfield {
     }
 
     public void setAll(boolean value) {
-        if(value){
+        if (value) {
             bits = ~0L;
-        }else{
+        } else {
             bits = 0L;
         }
     }
@@ -62,9 +62,9 @@ public final class Bitfield {
     public void switchBit(int index) {
         checkIndex(index);
 
-        if(get(index)){
+        if (get(index)) {
             set(index, false);
-        }else{
+        } else {
             set(index, true);
         }
     }
@@ -107,7 +107,7 @@ public final class Bitfield {
 
     public Bitfield not() {
         Bitfield result = new Bitfield();
-        result.bits = ~ bits;
+        result.bits = ~bits;
 
         return result;
     }
