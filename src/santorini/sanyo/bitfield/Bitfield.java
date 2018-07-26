@@ -16,6 +16,10 @@ public final class Bitfield {
         bits = bf.bits;
     }
 
+    public Bitfield(long bits) {
+        this.bits = bits;
+    }
+
 
     private void checkIndex(int index) {
         if (index < 0 || index >= SIZE) {
@@ -109,24 +113,15 @@ public final class Bitfield {
     }
 
     public Bitfield and(Bitfield other) {
-        Bitfield result = new Bitfield(this);
-        result.bits = bits & other.bits;
-
-        return result;
+        return new Bitfield(this.bits & other.bits);
     }
 
     public Bitfield or(Bitfield other) {
-        Bitfield result = new Bitfield(this);
-        result.bits = bits | other.bits;
-
-        return result;
+        return new Bitfield(this.bits | other.bits);
     }
 
     public Bitfield xor(Bitfield other) {
-        Bitfield result = new Bitfield(this);
-        result.bits = bits ^ other.bits;
-
-        return result;
+        return new Bitfield(this.bits ^ other.bits);
     }
 
     @Override
