@@ -73,10 +73,6 @@ public final class Bitfield {
         bits ^= mask.bits;
     }
 
-    private void switchBits(long mask) {
-//       no tests for it
-    }
-
     public boolean any() {
         return bits != 0L;
     }
