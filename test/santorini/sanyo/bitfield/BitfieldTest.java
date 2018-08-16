@@ -1,12 +1,11 @@
 package santorini.sanyo.bitfield;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import java.lang.reflect.Modifier;
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class BitfieldTest {
+public class BitfieldTest {
     private static final Bitfield a = new Bitfield();
     private static final Bitfield b = new Bitfield();
     private static final Bitfield same = new Bitfield();
@@ -18,41 +17,41 @@ class BitfieldTest {
         boolean[] a = {false, true, false, true};
         boolean[] b = {false, true, true, false};
 
-        for(int i = 0; i != a.length; ++i) {
+        for (int i = 0; i != a.length; ++i) {
             BitfieldTest.a.set(i, a[i]);
         }
 
-        for(int i = 0; i != b.length; ++i) {
+        for (int i = 0; i != b.length; ++i) {
             BitfieldTest.b.set(i, b[i]);
         }
 
-        for(int i = 0; i != Bitfield.SIZE; ++i) {
+        for (int i = 0; i != Bitfield.SIZE; ++i) {
             same.set(i, BitfieldTest.a.get(i) == BitfieldTest.b.get(i));
         }
 
-        for(int i = 0; i != Bitfield.SIZE; ++i) {
+        for (int i = 0; i != Bitfield.SIZE; ++i) {
             different.set(i, BitfieldTest.a.get(i) != BitfieldTest.b.get(i));
         }
 
-        for(int i = 0; i != all.SIZE; ++i) {
+        for (int i = 0; i != all.SIZE; ++i) {
             all.set(i, true);
         }
     }
 
     @Test
-    void get() {
-        for(int i = 0; i != Bitfield.SIZE; ++i) {
-            if(same.get(i)) {
-                assertEquals(a.get(i), b.get(i), "Index " + i);
+    public void get() {
+        for (int i = 0; i != Bitfield.SIZE; ++i) {
+            if (same.get(i)) {
+                assertEquals("Index " + i, a.get(i), b.get(i));
             } else {
-                assertEquals(different.get(i), true, "Index " + i);
-                assertNotEquals(a.get(i), b.get(i), "Index " + i);
+                assertEquals("Index " + i, different.get(i), true);
+                assertNotEquals("Index " + i, a.get(i), b.get(i));
             }
         }
     }
 
     @Test
-    void set1() {
+    public void set1() {
         Bitfield temp = new Bitfield();
         temp.set(a, true);
         assertEquals(temp, a);
@@ -74,7 +73,7 @@ class BitfieldTest {
     }
 
     @Test
-    void set2() {
+    public void set2() {
         Bitfield temp = new Bitfield();
         temp.set(a);
         assertEquals(temp, a);
@@ -82,7 +81,7 @@ class BitfieldTest {
     }
 
     @Test
-    void setAll() {
+    public void setAll() {
         Bitfield temp = new Bitfield();
         temp.setAll(true);
         assertEquals(temp, all);
@@ -91,10 +90,10 @@ class BitfieldTest {
     }
 
     @Test
-    void switchBit() {
+    public void switchBit() {
         Bitfield temp = new Bitfield(a);
-        for(int i = 0; i != Bitfield.SIZE; ++i) {
-            if(different.get(i)) {
+        for (int i = 0; i != Bitfield.SIZE; ++i) {
+            if (different.get(i)) {
                 temp.switchBit(i);
             }
         }
@@ -102,14 +101,14 @@ class BitfieldTest {
     }
 
     @Test
-    void switchBits() {
+    public void switchBits() {
         Bitfield temp = new Bitfield(a);
         temp.switchBits(different);
         assertEquals(temp, b);
     }
 
     @Test
-    void any() {
+    public void any() {
         assertEquals(a.any(), true);
         assertEquals(b.any(), true);
         assertEquals(same.any(), true);
@@ -119,7 +118,7 @@ class BitfieldTest {
     }
 
     @Test
-    void anyOf() {
+    public void anyOf() {
         assertEquals(a.anyOf(a), true);
         assertEquals(a.anyOf(b), true);
         assertEquals(same.anyOf(different), false);
@@ -131,7 +130,7 @@ class BitfieldTest {
     }
 
     @Test
-    void all() {
+    public void all() {
         assertEquals(a.all(), false);
         assertEquals(b.all(), false);
         assertEquals(same.all(), false);
@@ -141,7 +140,7 @@ class BitfieldTest {
     }
 
     @Test
-    void allOf() {
+    public void allOf() {
         assertEquals(a.allOf(a), true);
         assertEquals(a.allOf(b), false);
         assertEquals(same.allOf(different), false);
@@ -153,14 +152,14 @@ class BitfieldTest {
     }
 
     @Test
-    void invert() {
+    public void invert() {
         Bitfield temp = new Bitfield(same);
         temp.invert();
         assertEquals(temp, different);
     }
 
     @Test
-    void keep() {
+    public void keep() {
         Bitfield temp = new Bitfield(a);
         temp.keep(b);
         temp.keep(temp);
@@ -169,7 +168,7 @@ class BitfieldTest {
     }
 
     @Test
-    void include() {
+    public void include() {
         Bitfield temp = new Bitfield(a);
         temp.include(b);
         temp.include(temp);
@@ -178,7 +177,7 @@ class BitfieldTest {
     }
 
     @Test
-    void not() {
+    public void not() {
         assertEquals(same.not(), different);
         assertNotEquals(a.not(), a);
         assertNotEquals(a.not(), b);
@@ -186,7 +185,7 @@ class BitfieldTest {
     }
 
     @Test
-    void and() {
+    public void and() {
         assertEquals(a.and(b), b.and(a));
         assertEquals(a.and(a), a);
         assertEquals(same.allOf(a.and(b)), true);
@@ -194,7 +193,7 @@ class BitfieldTest {
     }
 
     @Test
-    void or() {
+    public void or() {
         assertEquals(a.or(b), b.or(a));
         assertEquals(a.or(a), a);
         assertEquals(same.allOf(a.or(b).not()), true);
@@ -202,14 +201,14 @@ class BitfieldTest {
     }
 
     @Test
-    void xor() {
+    public void xor() {
         assertEquals(a.xor(b), b.xor(a));
         assertEquals(a.xor(b), different);
         assertEquals(a.xor(a), none);
     }
 
     @Test
-    void notAndOrXorRelations() {
+    public void notAndOrXorRelations() {
         assertEquals(a.or(a.not()), all);
         assertEquals(a.and(b), a.not().or(b.not()).not());
         assertEquals(a.or(b), a.not().and(b.not()).not());
@@ -217,7 +216,7 @@ class BitfieldTest {
     }
 
     @Test
-    void equals() {
+    public void equals() {
         assertEquals(a, a);
         assertEquals(a.hashCode(), a.hashCode());
         assertEquals(a, new Bitfield(a));
