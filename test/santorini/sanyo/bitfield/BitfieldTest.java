@@ -191,7 +191,7 @@ public class BitfieldTest {
         assertEquals(a.and(b), b.and(a));
         assertEquals(a.and(a), a);
         assertTrue(same.allOf(a.and(b)));
-        assertTrue(different.anyOf(a.and(b)));
+        assertFalse(different.anyOf(a.and(b)));
     }
 
     @Test
