@@ -3,7 +3,9 @@ package santorini.sanyo.bitfield;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BitfieldTest {
     private static final Bitfield a = new Bitfield();
@@ -44,7 +46,7 @@ public class BitfieldTest {
             if (same.get(i)) {
                 assertEquals("Index " + i, a.get(i), b.get(i));
             } else {
-                assertEquals("Index " + i, different.get(i), true);
+                assertTrue("Index " + i, different.get(i));
                 assertNotEquals("Index " + i, a.get(i), b.get(i));
             }
         }
@@ -109,46 +111,46 @@ public class BitfieldTest {
 
     @Test
     public void any() {
-        assertEquals(a.any(), true);
-        assertEquals(b.any(), true);
-        assertEquals(same.any(), true);
-        assertEquals(different.any(), true);
-        assertEquals(none.any(), false);
-        assertEquals(all.any(), true);
+        assertTrue(a.any());
+        assertTrue(b.any());
+        assertTrue(same.any());
+        assertTrue(different.any());
+        assertFalse(none.any());
+        assertTrue(all.any());
     }
 
     @Test
     public void anyOf() {
-        assertEquals(a.anyOf(a), true);
-        assertEquals(a.anyOf(b), true);
-        assertEquals(same.anyOf(different), false);
-        assertEquals(a.anyOf(none), false);
-        assertEquals(a.anyOf(all), true);
-        assertEquals(all.anyOf(none), false);
-        assertEquals(all.anyOf(all), true);
-        assertEquals(none.anyOf(none), false);
+        assertTrue(a.anyOf(a));
+        assertTrue(a.anyOf(b));
+        assertFalse(same.anyOf(different));
+        assertFalse(a.anyOf(none));
+        assertTrue(a.anyOf(all));
+        assertFalse(all.anyOf(none));
+        assertTrue(all.anyOf(all));
+        assertFalse(none.anyOf(none));
     }
 
     @Test
     public void all() {
-        assertEquals(a.all(), false);
-        assertEquals(b.all(), false);
-        assertEquals(same.all(), false);
-        assertEquals(different.all(), false);
-        assertEquals(none.all(), false);
-        assertEquals(all.all(), true);
+        assertFalse(a.all());
+        assertFalse(b.all());
+        assertFalse(same.all());
+        assertFalse(different.all());
+        assertFalse(none.all());
+        assertTrue(all.all());
     }
 
     @Test
     public void allOf() {
-        assertEquals(a.allOf(a), true);
-        assertEquals(a.allOf(b), false);
-        assertEquals(same.allOf(different), false);
-        assertEquals(a.allOf(none), true);
-        assertEquals(a.allOf(all), false);
-        assertEquals(all.allOf(none), true);
-        assertEquals(all.allOf(all), true);
-        assertEquals(none.allOf(none), true);
+        assertTrue(a.allOf(a));
+        assertFalse(a.allOf(b));
+        assertFalse(same.allOf(different));
+        assertTrue(a.allOf(none));
+        assertFalse(a.allOf(all));
+        assertTrue(all.allOf(none));
+        assertTrue(all.allOf(all));
+        assertTrue(none.allOf(none));
     }
 
     @Test
@@ -163,8 +165,8 @@ public class BitfieldTest {
         Bitfield temp = new Bitfield(a);
         temp.keep(b);
         temp.keep(temp);
-        assertEquals(a.allOf(temp), true);
-        assertEquals(b.allOf(temp), true);
+        assertTrue(a.allOf(temp));
+        assertTrue(b.allOf(temp));
     }
 
     @Test
@@ -172,8 +174,8 @@ public class BitfieldTest {
         Bitfield temp = new Bitfield(a);
         temp.include(b);
         temp.include(temp);
-        assertEquals(temp.allOf(a), true);
-        assertEquals(temp.allOf(b), true);
+        assertTrue(temp.allOf(a));
+        assertTrue(temp.allOf(b));
     }
 
     @Test
@@ -188,16 +190,16 @@ public class BitfieldTest {
     public void and() {
         assertEquals(a.and(b), b.and(a));
         assertEquals(a.and(a), a);
-        assertEquals(same.allOf(a.and(b)), true);
-        assertEquals(different.anyOf(a.and(b)), false);
+        assertTrue(same.allOf(a.and(b)));
+        assertTrue(different.anyOf(a.and(b)));
     }
 
     @Test
     public void or() {
         assertEquals(a.or(b), b.or(a));
         assertEquals(a.or(a), a);
-        assertEquals(same.allOf(a.or(b).not()), true);
-        assertEquals(a.or(b).allOf(different), true);
+        assertTrue(same.allOf(a.or(b).not()));
+        assertTrue(a.or(b).allOf(different));
     }
 
     @Test
