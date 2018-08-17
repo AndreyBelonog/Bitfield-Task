@@ -35,7 +35,7 @@ public class BitfieldTest {
             different.set(i, BitfieldTest.a.get(i) != BitfieldTest.b.get(i));
         }
 
-        for (int i = 0; i != all.SIZE; ++i) {
+        for (int i = 0; i != Bitfield.SIZE; ++i) {
             all.set(i, true);
         }
     }
