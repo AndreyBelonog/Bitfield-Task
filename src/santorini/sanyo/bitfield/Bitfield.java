@@ -66,11 +66,7 @@ public final class Bitfield {
     public void switchBit(int index) {
         checkIndex(index);
 
-        if (get(index)) {
-            set(index, false);
-        } else {
-            set(index, true);
-        }
+        set(index, !get(index));
     }
 
     public void switchBits(Bitfield mask) {
